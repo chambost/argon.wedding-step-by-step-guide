@@ -58,6 +58,14 @@ Venue.create!([
         </td>
 ```
 
+## app/view/venues/show.html.erb
+
+```
+  <strong>3D Tour Experience:</strong>
+  <iframe width="853" height="480" src="https://my.matterport.com/show/?m=<%= venue.mp_id %>" frameborder="0" allowfullscreen allow="vr">
+  </iframe>
+```
+
 # Step 2 - Bootstrap
 
 - `yarn add bootstrap jquery popper.js`
@@ -88,9 +96,11 @@ environment.plugins.append(
 
 ## app/models/Venue.rb
 
-```
-    validates :mp_id, length: { is: 11 , message: "Matterport ID must be 11 alphanumeric characters" }
+```    
+    validates :mp_id, presence: true, length: { is: 11 , message: "Matterport ID must be 11 alphanumeric characters" }
     validates_format_of :identifier, with: /\A[a-z0-9][a-z0-9\-]*\z/i, message: "Lowercase letters, digits and hyphens only in identifier"
+    validates :identifier, presence: true
+    validates :name, presence: true
 
 ```
 
